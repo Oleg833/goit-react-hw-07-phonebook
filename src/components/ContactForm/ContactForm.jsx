@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/slice';
+
 import { nanoid } from 'nanoid';
-import { selectContacts } from 'redux/selector';
+import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -39,6 +40,10 @@ const ContactForm = () => {
       ? alert(`${name} is already in contacts`)
       : dispatch(addContact(contact));
 
+    resetForm();
+  };
+
+  const resetForm = () => {
     setName('');
     setNumber('');
   };
